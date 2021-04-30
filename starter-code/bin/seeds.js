@@ -1,5 +1,5 @@
 
-const Celebrity = require('../models/celebrity.js');
+const Celebrity = require('../models/Celebrity.model');
 
 const celebrities = [
     {name:'Adam Sandler', occupation:'Actor', catchPhrase: 'Oh really, fool?'},
@@ -20,4 +20,4 @@ Celebrity.create(celebrities)
     console.log(feedback)
     mongoose.connection.close()
 })
-.catch(error => console.log('An erro ocurred while creating celebrities', error ))
+.catch(error => console.log('An error ocurred while creating celebrities', error ))
