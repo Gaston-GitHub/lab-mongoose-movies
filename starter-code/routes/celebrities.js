@@ -4,7 +4,6 @@ const router = express.Router();
 const Celebrity = require('../models/Celebrity.model');
 
 
-
 router.get('/celebrities', (req, res, next) => {
     Celebrity.find({})
     .then((celebrities) => {
@@ -14,6 +13,10 @@ router.get('/celebrities', (req, res, next) => {
         next(error)
     })
 })
+
+router.get('/celebrities/new', (req, res, next) => {
+    res.render('celebrities/new')
+ })
 
 router.get('/celebrities/:id', (req, res, next) => {
     const id = req.params.id
@@ -26,5 +29,28 @@ router.get('/celebrities/:id', (req, res, next) => {
         next(error)
     })
 })
+
+router.post('/celebrities', (req, res, next) => {
+    const {name, occupation, catchPhrase} = req.body
+    Celebrity.create({name, occupation, catchPhrase})
+    .then(() => res.redirect('/celebrities'))
+    .catch((error) => {
+        res.render('/celebrities/new', error)
+      })
+})
+
+router.post('/celebrities/:id/delete', (req, res, next) => {
+    const {id} = req.params
+    Celebrity.findByIdAndRemove(id)
+    .then(() => {
+        res.redirect('/celebrities')
+    })
+    .catch((error) => {
+        next(error)
+    })
+})
+
+
+
 
 module.exports = router;
