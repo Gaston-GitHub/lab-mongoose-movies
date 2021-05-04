@@ -50,7 +50,22 @@ router.post('/celebrities/:id/delete', (req, res, next) => {
     })
 })
 
+router.get('/celebrities/:id/edit', (req, res, next) => {
+    const {id} = req.params.id
+    Celebrity.findById(id)
+    .then((celebrityId) => res.render('celebrities/edit', celebrityId))
+    .catch((error) => next(error))
+})
 
+router.post('/celebrities/:id', (req, res, next) => {
+    const {name, occupation, catchPhrase} = req.body
+    Celebrity.findByIdAndUpdate(req.params.id, {name, occupation, catchPhrase}, {new:true})
+    .then(() => {
+        console.log('update')
+        res.redirect('/celebrities')
+    })
+    .catch((error) => console.log(error))
+})
 
 
 module.exports = router;

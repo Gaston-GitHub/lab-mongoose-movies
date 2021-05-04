@@ -1,0 +1,10 @@
+<h2>Listing all movies</h2>
+{{#each movies}}
+<p>Name: <a href='/movies/{{this._id}}'>{{name}}</a></p>
+<form action='/movies/{{this._id}}/delete' method='POST'>
+  <button type='submit'>Delete</button>
+
+  {{/each}}
+  <br>
+  <br>
+  <a href='/movies/new'>Create new celebrity</a>
