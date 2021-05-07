@@ -25,11 +25,11 @@ router.get('/movies/:id', (req, res, next) => {
   .catch((error) => console.log(error))
 })
 
-router.get('/movies/create', (req, res, next) => {
+router.get('/create', (req, res, next) => {
   res.render('movies/create')
 });
 
-router.post('movies/create', (req, res, next) => {
+router.post('/movies', (req, res, next) => {
   const {title, genre, plot} = req.body;
   Movie.create({title, genre, plot})
   .then((newMovie) => {
@@ -38,6 +38,10 @@ router.post('movies/create', (req, res, next) => {
   })
   .catch((error) => console.log(error))
 })
+
+
+
+
 
 
 
