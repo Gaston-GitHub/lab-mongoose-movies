@@ -39,6 +39,17 @@ router.post('/movies', (req, res, next) => {
   .catch((error) => console.log(error))
 })
 
+router.post('/movies/:id/delete', (req, res, next) => {
+  const {id} = req.params
+  Movie.findByIdAndRemove(id)
+  .then(() => {
+      res.redirect('/movies')
+  })
+  .catch((error) => {
+      next(error)
+  })
+})
+
 
 
 
